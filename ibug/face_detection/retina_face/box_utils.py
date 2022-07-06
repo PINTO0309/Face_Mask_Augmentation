@@ -10,8 +10,13 @@ def point_form(boxes):
     Return:
         boxes: (tensor) Converted xmin, ymin, xmax, ymax form of boxes.
     """
-    return torch.cat((boxes[:, :2] - boxes[:, 2:]/2,     # xmin, ymin
-                     boxes[:, :2] + boxes[:, 2:]/2), 1)  # xmax, ymax
+    return torch.cat(
+        (
+            boxes[:, :2] - boxes[:, 2:]/2,  # xmin, ymin
+            boxes[:, :2] + boxes[:, 2:]/2,  # xmax, ymax
+        ),
+        1,
+    )
 
 
 def center_size(boxes):
@@ -22,8 +27,12 @@ def center_size(boxes):
     Return:
         boxes: (tensor) Converted xmin, ymin, xmax, ymax form of boxes.
     """
-    return torch.cat((boxes[:, 2:] + boxes[:, :2])/2,  # cx, cy
-                     boxes[:, 2:] - boxes[:, :2], 1)  # w, h
+    return torch.cat(
+        (
+            boxes[:, 2:] + boxes[:, :2])/2,  # cx, cy
+            boxes[:, 2:] - boxes[:, :2],  # w, h
+            1,
+        )
 
 
 def intersect(box_a, box_b):
@@ -32,17 +41,21 @@ def intersect(box_a, box_b):
     [B,2] -> [1,B,2] -> [A,B,2]
     Then we compute the area of intersect between box_a and box_b.
     Args:
-      box_a: (tensor) bounding boxes, Shape: [A,4].
-      box_b: (tensor) bounding boxes, Shape: [B,4].
+        box_a: (tensor) bounding boxes, Shape: [A,4].
+        box_b: (tensor) bounding boxes, Shape: [B,4].
     Return:
-      (tensor) intersection area, Shape: [A,B].
+        (tensor) intersection area, Shape: [A,B].
     """
     A = box_a.size(0)
     B = box_b.size(0)
-    max_xy = torch.min(box_a[:, 2:].unsqueeze(1).expand(A, B, 2),
-                       box_b[:, 2:].unsqueeze(0).expand(A, B, 2))
-    min_xy = torch.max(box_a[:, :2].unsqueeze(1).expand(A, B, 2),
-                       box_b[:, :2].unsqueeze(0).expand(A, B, 2))
+    max_xy = torch.min(
+        box_a[:, 2:].unsqueeze(1).expand(A, B, 2),
+        box_b[:, 2:].unsqueeze(0).expand(A, B, 2)
+    )
+    min_xy = torch.max(
+        box_a[:, :2].unsqueeze(1).expand(A, B, 2),
+        box_b[:, :2].unsqueeze(0).expand(A, B, 2)
+    )
     inter = torch.clamp((max_xy - min_xy), min=0)
     return inter[:, :, 0] * inter[:, :, 1]
 
@@ -60,10 +73,12 @@ def jaccard(box_a, box_b):
         jaccard overlap: (tensor) Shape: [box_a.size(0), box_b.size(0)]
     """
     inter = intersect(box_a, box_b)
-    area_a = ((box_a[:, 2]-box_a[:, 0]) *
-              (box_a[:, 3]-box_a[:, 1])).unsqueeze(1).expand_as(inter)  # [A,B]
-    area_b = ((box_b[:, 2]-box_b[:, 0]) *
-              (box_b[:, 3]-box_b[:, 1])).unsqueeze(0).expand_as(inter)  # [A,B]
+    area_a = (
+        (box_a[:, 2]-box_a[:, 0]) *
+        (box_a[:, 3]-box_a[:, 1])).unsqueeze(1).expand_as(inter)  # [A,B]
+    area_b = (
+        (box_b[:, 2]-box_b[:, 0]) *
+        (box_b[:, 3]-box_b[:, 1])).unsqueeze(0).expand_as(inter)  # [A,B]
     union = area_a + area_b - inter
     return inter / union  # [A,B]
 
