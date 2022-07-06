@@ -1,0 +1,16 @@
+ibug_face_alignment.egg-info
+*train_aug_120x120_part/
+*train_aug_120x120_part_masked/
+*train_aug_120x120_part_masked_clean/
+*300W_LP_croped/
+train_aug_120x120_part_masked_clean.tar.gz
+3dmm_data/
+3dmm_data.tar.gz
+300W_LP_croped_masked/
+multi_detected.csv
+non_detected.csv
+__pycache__/
+.vscode/
+2dfan4.pth
+mobilenet0.25_Final.pth
+Resnet50_Final.pth
