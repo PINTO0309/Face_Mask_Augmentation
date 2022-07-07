@@ -9,3 +9,8 @@ https://user-images.githubusercontent.com/33194443/177553855-ca0cea66-6453-4000-
 3. https://github.com/GajuuzZ/FaceNetPytoch-Mask No-License
 4. https://ibug.doc.ic.ac.uk/resources/itwmm/ 3DMM
 5. http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm 300W-LP, AFLW2000
+
+# References
+1. https://github.com/PINTO0309/DMHead
+
+    https://user-images.githubusercontent.com/33194443/175073709-e9c43655-27a9-4760-a38c-768dabe33c1f.mp4
