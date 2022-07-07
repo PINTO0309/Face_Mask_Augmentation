@@ -63,7 +63,7 @@ for i, fol in enumerate(list_fol):
         image = cv2.imread(image_file)[:, :, ::-1]
         # Load .mat
         mat = sio.loadmat(mat_file)
-        # 最終クロップ用画像サイズの計算（アノテーションデータのサイズに調整するためのクロップ用）
+        # Calculate image size for final crop (for cropping to adjust to size of annotation data)
         pt2d = mat['pt2d']
         x_min = min(pt2d[0,:])
         y_min = min(pt2d[1,:])
@@ -104,15 +104,15 @@ for i, fol in enumerate(list_fol):
         face_mask = image_mask[:, :, ::-1]
 
         cv2.imwrite(
-            os.path.join(save_fol, os.path.basename(image_file).split('.')[0] + f'.jpg'),
+            os.path.join(save_fol, os.path.basename(image_file).split('.')[0] + '.jpg'),
             image[crop_start_y:crop_end_y, crop_start_x:crop_end_x, :][..., ::-1],
         )
         cv2.imwrite(
-            os.path.join(save_fol, os.path.basename(image_file).split('.')[0] + f'_masked.jpg'),
+            os.path.join(save_fol, os.path.basename(image_file).split('.')[0] + '_masked.jpg'),
             face_mask[crop_start_y:crop_end_y, crop_start_x:crop_end_x, :],
         )
         shutil.copy(mat_file, save_fol)
-        shutil.copy(mat_file, os.path.join(save_fol, os.path.basename(mat_file).split('.')[0] + f'_masked.mat'))
+        shutil.copy(mat_file, os.path.join(save_fol, os.path.basename(mat_file).split('.')[0] + '_masked.mat'))
 
 
 
