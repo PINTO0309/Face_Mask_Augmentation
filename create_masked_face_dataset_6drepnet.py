@@ -31,7 +31,7 @@ image_size = 480
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-masker = [FaceMasker()]
+masker = FaceMasker()
 
 list_fol = os.listdir(source_folder)
 num_fol = len(list_fol)
@@ -99,8 +99,7 @@ for i, fol in enumerate(list_fol):
             continue
 
         # Save masked-extracted face.
-        mkr = masker[0]
-        image_mask = mkr.wear_mask_to_face(image, landmarks)
+        image_mask = masker.wear_mask_to_face(image, landmarks)
         face_mask = image_mask[:, :, ::-1]
 
         cv2.imwrite(
