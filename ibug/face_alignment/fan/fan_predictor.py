@@ -5,7 +5,7 @@ import numpy as np
 from types import SimpleNamespace
 from typing import Union, Optional, Tuple
 # from .fan_custom import FAN
-from fan import FAN
+from ibug.face_alignment.fan.fan import FAN
 
 
 __all__ = ['FANPredictor']

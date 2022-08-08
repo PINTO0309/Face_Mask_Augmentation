@@ -1,1 +1,1 @@
-from retina_face_predictor import RetinaFacePredictor
+from ibug.face_detection.retina_face.retina_face_predictor import RetinaFacePredictor

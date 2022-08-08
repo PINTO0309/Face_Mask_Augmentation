@@ -14,3 +14,16 @@ __pycache__/
 2dfan4.pth
 mobilenet0.25_Final.pth
 Resnet50_Final.pth
+300W_LP_w_masked/
+300W_LP_w_no_masked_image_only/
+300W_LP_w_no_masked_image_only.tar.gz
+yolov4_headdetection_480x640_post.onnx
+yolov7_tiny_head_0.752_post_480x640.onnx
+300W_LP/
+300W_LP_onlyone_person/
+300W_LP_onlyone_person_yolov4_filterd/
+300wlp-*x*/
+data/
+TensorrtExecutionProvider_*
+non_detected.csv
+multi_detected.csv
