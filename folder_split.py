@@ -27,7 +27,7 @@ def main():
         new_folder_number = image_count // FOLDER_MAX
         dirname = os.path.dirname(image_file)
         # print(f'@@@ dirname: {dirname} split: {dirname.split("/")}')
-        new_dirname = f'{args.image_folder_path}_{str(new_folder_number).zfill(6)}'
+        new_dirname = f'{args.image_folder_path}_{str(new_folder_number).zfill(2)}'
         os.makedirs(new_dirname, exist_ok=True)
 
         shutil.move(image_file, new_dirname)
